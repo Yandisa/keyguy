@@ -494,38 +494,6 @@
         <div class="trust-chip"><span class="trust-chip-label">Response</span><span class="trust-chip-val">Fast</span></div>
       </div>
     </div>
-
-    <div class="hero-card">
-      <div class="hero-card-title">Get Help Now</div>
-      <div class="hero-card-sub">Reach us instantly — no hold music.</div>
-      <div class="contact-quick">
-        <a class="contact-quick-btn" href="{{ settings.phone_primary_url }}">
-          <div class="icon-wrap icon-wrap-gold">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f0bb50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.25 6.25l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
-          </div>
-          <div class="contact-quick-info">
-            <strong>{{ settings.phone_primary }}</strong>
-            {% if settings.phone_secondary %}<span>Also: {{ settings.phone_secondary }}</span>{% else %}<span>Call for immediate assistance</span>{% endif %}
-          </div>
-        </a>
-        <a class="contact-quick-btn" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">
-          <div class="icon-wrap icon-wrap-wa">
-            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366"/><path fill="#fff" d="M9.3 8.7c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .5.4l.8 2c.1.2 0 .4-.1.6l-.4.5c-.1.1-.2.2-.1.4.3.5.9 1.3 1.8 1.8.2.1.3.1.4-.1l.5-.6c.1-.2.3-.2.5-.1l1.9.9c.3.1.4.3.3.6-.2.8-.9 1.4-1.7 1.5-.7.1-1.6-.1-3-.8-2-.9-3.4-3.2-3.8-4-.4-.7-.5-1.5-.2-2.1Z"/></svg>
-          </div>
-          <div class="contact-quick-info">
-            <strong>WhatsApp</strong>
-            <span>Chat now — quick response</span>
-          </div>
-        </a>
-      </div>
-      <div class="card-divider"></div>
-      <div style="font-size:.8rem;color:#5a7aaa;margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Services at a glance</div>
-      <div class="quick-links">
-        {% for service in services|slice:":4" %}
-        <a class="quick-link-chip" href="#services">{{ service.title }}</a>
-        {% endfor %}
-      </div>
-    </div>
   </div>
 </section>
 
