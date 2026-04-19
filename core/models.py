@@ -192,7 +192,7 @@ class GalleryImage(models.Model):
     image_url = models.URLField(blank=True, help_text='Or paste an image URL if not uploading a file')
     video_url = models.URLField(
         blank=True,
-        help_text='Paste a YouTube or TikTok URL. Leave blank for images.'
+        help_text='YouTube links only — e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX. Leave blank for images.'
     )
     caption   = models.CharField(max_length=200, blank=True)
     order     = models.PositiveIntegerField(default=0)
@@ -215,17 +215,13 @@ class GalleryImage(models.Model):
         return self.image_url
 
     def embed_url(self):
-        """Convert a YouTube or TikTok watch URL to an embed URL."""
+        """Convert a YouTube watch URL to an embed URL."""
         import re
         url = self.video_url
         # YouTube: watch?v=ID or youtu.be/ID or shorts/ID
         yt = re.search(r'(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]{11})', url)
         if yt:
             return f'https://www.youtube.com/embed/{yt.group(1)}?rel=0&modestbranding=1'
-        # TikTok: /video/ID
-        tt = re.search(r'tiktok\.com/.+/video/(\d+)', url)
-        if tt:
-            return f'https://www.tiktok.com/embed/v2/{tt.group(1)}'
         return url
 
 
