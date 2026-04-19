@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 # ─────────────────────────────────────────────────────────────
@@ -185,10 +186,27 @@ class FAQ(models.Model):
 
 
 # ─────────────────────────────────────────────────────────────
+# GALLERY VALIDATORS
+# ─────────────────────────────────────────────────────────────
+def validate_image_size(image):
+    max_mb = 2
+    if image.size > max_mb * 1024 * 1024:
+        raise ValidationError(f'Image file too large. Maximum size is {max_mb}MB. Your file is {image.size / 1024 / 1024:.1f}MB.')
+
+MAX_GALLERY_ITEMS = 50
+
+def validate_gallery_limit(value):
+    from core.models import GalleryImage
+    count = GalleryImage.objects.count()
+    if count >= MAX_GALLERY_ITEMS:
+        raise ValidationError(f'Gallery limit reached. Maximum {MAX_GALLERY_ITEMS} items allowed. Please delete an item before adding a new one.')
+
+
+# ─────────────────────────────────────────────────────────────
 # GALLERY
 # ─────────────────────────────────────────────────────────────
 class GalleryImage(models.Model):
-    image     = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    image     = models.ImageField(upload_to='gallery/', blank=True, null=True, validators=[validate_image_size])
     image_url = models.URLField(blank=True, help_text='Or paste an image URL if not uploading a file')
     video_url = models.TextField(
         blank=True,
@@ -205,6 +223,13 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return self.caption or f'Item {self.pk}'
+
+    def clean(self):
+        # Enforce 50 item limit on new items only
+        if not self.pk:
+            count = GalleryImage.objects.count()
+            if count >= MAX_GALLERY_ITEMS:
+                raise ValidationError(f'Gallery limit reached. Maximum {MAX_GALLERY_ITEMS} items allowed. Please delete an existing item first.')
 
     def is_video(self):
         return bool(self.video_url)
