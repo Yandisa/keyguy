@@ -1,0 +1,87 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Gallery | {{ settings.business_name }}{% endblock %}
+{% block meta_description %}See our work — real key repairs, reprogramming and mobile diagnostics across Centurion and Pretoria.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .gallery-page-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .gallery-page-item{
+    border-radius:16px;overflow:hidden;position:relative;
+    background:#e8edf6;aspect-ratio:4/3;
+  }
+  .gallery-page-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block}
+  .gallery-page-item:hover img{transform:scale(1.05)}
+  .gallery-page-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,45,90,.6));pointer-events:none}
+  .gallery-page-item .caption{position:absolute;bottom:12px;left:14px;right:14px;color:#fff;font-size:.85rem;font-weight:600;z-index:2;opacity:0;transition:opacity .2s}
+  .gallery-page-item:hover .caption{opacity:1}
+  /* video thumbnail */
+  .gallery-page-item.video-item{cursor:pointer;display:block;text-decoration:none}
+  .gallery-page-item.video-item::after{display:none}
+  .video-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,0,0,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .2s}
+  .gallery-page-item.video-item:hover .video-play-btn{background:rgba(255,0,0,1);transform:translate(-50%,-50%) scale(1.1)}
+  .video-play-btn svg{width:24px;height:24px;fill:#fff;margin-left:4px}
+
+  @media(max-width:820px){.gallery-page-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.gallery-page-grid{grid-template-columns:1fr}}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'home' %}">Home</a> › <span>Gallery</span></div>
+    <div class="page-hero-kicker">Our Work</div>
+    <h1>Real Work,<br><span>Real Results</span></h1>
+    <p>Professional care on every call-out — from a simple key repair to full transponder reprogramming.</p>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="section section-darker">
+  <div class="container">
+    {% if gallery %}
+    <div class="gallery-page-grid">
+      {% for item in gallery %}
+        {% if item.is_video %}
+        <a class="gallery-page-item video-item" href="{{ item.video_link }}" target="_blank" rel="noopener" title="{{ item.caption|default:'Watch video' }}">
+          <img src="{{ item.thumbnail_url }}" alt="{{ item.caption|default:'Video' }}" loading="lazy">
+          <div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          {% if item.caption %}<span class="caption">{{ item.caption }}</span>{% endif %}
+        </a>
+        {% else %}
+        <div class="gallery-page-item">
+          <img src="{{ item.src }}" alt="{{ item.caption|default:'Gallery image' }}" loading="lazy">
+          {% if item.caption %}<span class="caption">{{ item.caption }}</span>{% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:60px 0;">
+      <p style="color:#5a7aaa;font-size:1.1rem;">Gallery coming soon — check back shortly.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Like What You See?<br><span class="gold">We Come to You.</span></h2>
+    <p>Call or WhatsApp for a fast quote. Mobile service across Centurion, Pretoria and surrounding areas.</p>
+    <div class="cta-actions">
+      <a class="btn btn-gold" href="{{ settings.phone_primary_url }}">Call {{ settings.phone_primary }}</a>
+      <a class="btn btn-wa" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Now</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
