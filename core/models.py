@@ -39,7 +39,7 @@ class SiteSettings(models.Model):
                                         help_text='Upload overrides the URL above')
 
     # Stats bar
-    stat_keys_replaced  = models.PositiveIntegerField(default=500)
+    stat_jobs_done       = models.PositiveIntegerField(default=500)
     stat_makes_covered  = models.PositiveIntegerField(default=50)
     stat_areas_served   = models.PositiveIntegerField(default=8)
     stat_rating_label   = models.CharField(max_length=20, default='5★')
