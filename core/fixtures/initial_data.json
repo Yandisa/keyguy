@@ -1,0 +1,144 @@
+[
+  {
+    "model": "core.sitesettings",
+    "pk": 1,
+    "fields": {
+      "business_name": "KeyGuy Boss D",
+      "tagline": "Mobile Key Specialist",
+      "trading_as": "BOSS D trading as KeyGuy Centurion",
+      "phone_primary": "084 815 7329",
+      "phone_secondary": "076 827 4530",
+      "whatsapp_number": "27848157329",
+      "email": "keyesdiagnosis@gmail.com",
+      "location": "Centurion, Pretoria",
+      "hero_heading_1": "Lost Your Car Key?",
+      "hero_heading_2": "We Come To You.",
+      "hero_subtext": "Professional mobile car key programming, replacement, cutting and diagnostics across Centurion & Pretoria. On your doorstep — no towing, no dealership.",
+      "hero_badge_text": "Available Today · Mobile Service",
+      "hero_image_url": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=85",
+      "hero_image": null,
+      "stat_keys_replaced": 500,
+      "stat_makes_covered": 50,
+      "stat_areas_served": 8,
+      "stat_rating_label": "5★",
+      "meta_title": "KeyGuy Boss D | Mobile Car Key Programming, Replacement & Diagnostics",
+      "meta_description": "Mobile car key programming, replacement, cutting and diagnostics in Centurion and Pretoria. Fast on-site help for all makes and models. Call or WhatsApp 084 815 7329.",
+      "operating_hours": "Mon–Sat · Fast response"
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 1,
+    "fields": {"title": "Key Replacement", "description": "Lost or completely broken keys replaced on-site. We carry blanks for most makes and models, cut and program them right at your location.", "icon": "key", "order": 1, "is_active": true}
+  },
+  {
+    "model": "core.service",
+    "pk": 2,
+    "fields": {"title": "Key Programming", "description": "Transponders, smart keys, remote head keys and proximity fobs programmed to your vehicle's ECU. Tested and verified before we leave.", "icon": "cpu", "order": 2, "is_active": true}
+  },
+  {
+    "model": "core.service",
+    "pk": 3,
+    "fields": {"title": "Key Cutting", "description": "Precision cutting for replacement keys and duplicates. Standard, laser-cut and high-security key profiles cut with professional equipment.", "icon": "scissors", "order": 3, "is_active": true}
+  },
+  {
+    "model": "core.service",
+    "pk": 4,
+    "fields": {"title": "Mobile Diagnostics", "description": "On-site fault code scanning and vehicle diagnostics. We come to your location to identify electrical issues, immobiliser faults and key-related problems.", "icon": "diagnostics", "order": 4, "is_active": true}
+  },
+  {
+    "model": "core.service",
+    "pk": 5,
+    "fields": {"title": "Key Repair", "description": "Broken key shells, faulty buttons and damaged remote housings repaired or replaced on-site — cheaper than a full replacement when the electronics are intact.", "icon": "wrench", "order": 5, "is_active": true}
+  },
+  {
+    "model": "core.service",
+    "pk": 6,
+    "fields": {"title": "Spare Keys", "description": "Get a spare cut and programmed while we are on-site. Avoid being stranded — a spare key costs far less than an emergency call-out.", "icon": "shield", "order": 6, "is_active": true}
+  },
+  {
+    "model": "core.testimonial",
+    "pk": 1,
+    "fields": {"author_name": "Thabo M.", "location": "Centurion", "service_used": "Key replacement", "body": "Locked out at 7am before work. KeyGuy Boss D was on-site within 45 minutes, had a new key cut and programmed in under an hour. Incredibly professional and much cheaper than the dealership quoted.", "rating": 5, "is_active": true, "order": 1}
+  },
+  {
+    "model": "core.testimonial",
+    "pk": 2,
+    "fields": {"author_name": "Sarah J.", "location": "Pretoria East", "service_used": "BMW programming", "body": "Lost both keys for my BMW X3. The dealership wanted a fortune and a 3-day wait. KeyGuy came to my office in Pretoria East and sorted it in 90 minutes. Will definitely use again.", "rating": 5, "is_active": true, "order": 2}
+  },
+  {
+    "model": "core.testimonial",
+    "pk": 3,
+    "fields": {"author_name": "Rohan K.", "location": "Midrand", "service_used": "Remote repair", "body": "Quick, honest, and knowledgeable. He diagnosed the fault on my Audi key remote, fixed it on-site, and charged a very fair price. No upselling, no drama. Highly recommended.", "rating": 5, "is_active": true, "order": 3}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 1,
+    "fields": {"name": "Centurion", "order": 1, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 2,
+    "fields": {"name": "Pretoria Central", "order": 2, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 3,
+    "fields": {"name": "Pretoria East", "order": 3, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 4,
+    "fields": {"name": "Pretoria West", "order": 4, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 5,
+    "fields": {"name": "Midrand", "order": 5, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 6,
+    "fields": {"name": "Irene", "order": 6, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 7,
+    "fields": {"name": "Kyalami", "order": 7, "is_active": true}
+  },
+  {
+    "model": "core.servicearea",
+    "pk": 8,
+    "fields": {"name": "Nearby Areas", "order": 8, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 1,
+    "fields": {"question": "Do you work on all car makes and models?", "answer": "Yes. We cover VW, Toyota, BMW, Mercedes, Audi, Ford, Hyundai, Kia, Renault, Nissan, Mazda and more. Call us with your make, model and year and we will confirm before coming out.", "order": 1, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 2,
+    "fields": {"question": "How quickly can you get to me?", "answer": "Response time depends on your location and current workload. Call or WhatsApp for an honest ETA — we never give false promises.", "order": 2, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 3,
+    "fields": {"question": "Do I need to tow my car to you?", "answer": "No. We come to you — home, office, shopping centre or roadside. Our van is fully equipped to handle the job on-site.", "order": 3, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 4,
+    "fields": {"question": "How much does it cost?", "answer": "Pricing depends on the service and your vehicle. We quote upfront — no surprises, no hidden call-out fees. Our prices are significantly lower than dealership rates.", "order": 4, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 5,
+    "fields": {"question": "Can you make a key if I have lost all copies?", "answer": "In most cases, yes. We can originate a new key by cutting to code and programming it to your vehicle. Proof of ownership required.", "order": 5, "is_active": true}
+  },
+  {
+    "model": "core.faq",
+    "pk": 6,
+    "fields": {"question": "Do you offer mobile diagnostics?", "answer": "Yes. We come to your location with a professional diagnostic scanner to read fault codes, identify immobiliser issues and advise on next steps — all without you needing to visit a workshop.", "order": 6, "is_active": true}
+  }
+]
