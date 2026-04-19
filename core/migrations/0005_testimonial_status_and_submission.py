@@ -4,7 +4,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0003_rename_stat_jobs_done'),
+        ('core', '0004_galleryimage_video_url_textfield'),
     ]
 
     operations = [
