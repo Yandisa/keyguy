@@ -97,6 +97,16 @@ class FAQAdmin(admin.ModelAdmin):
 class GalleryImageAdmin(admin.ModelAdmin):
     list_display  = ('thumb', 'caption', 'item_type', 'order', 'is_active')
     list_editable = ('order', 'is_active')
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        count = GalleryImage.objects.count()
+        remaining = 50 - count
+        if remaining <= 10:
+            self.message_user(request,
+                f'⚠️ Gallery: {count}/50 items used. {remaining} slots remaining.',
+                level='warning' if remaining <= 5 else 'info')
+        return super().changelist_view(request, extra_context=extra_context)
     fieldsets = (
         ('Image', {
             'fields': ('image', 'image_url'),
@@ -104,7 +114,7 @@ class GalleryImageAdmin(admin.ModelAdmin):
         }),
         ('Video (YouTube only)', {
             'fields': ('video_url',),
-            'description': '⚠️ YouTube links only. Paste the full video URL e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX.',
+            'description': '⚠️ YouTube links only. Paste the full video URL e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX — TikTok does not support embedding on external sites.',
         }),
         ('Details', {
             'fields': ('caption', 'order', 'is_active'),
