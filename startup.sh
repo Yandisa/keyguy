@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+# Ensure data directory exists before anything else
+mkdir -p /app/data
+mkdir -p /app/media
+
 echo "Running migrations..."
 python manage.py migrate --noinput
 
