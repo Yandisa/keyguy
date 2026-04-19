@@ -1,29 +1,11 @@
 #!/bin/sh
 set -e
 
-# Ensure data directory exists before anything else
 mkdir -p /app/data
 mkdir -p /app/media
 
 echo "Running migrations..."
 python manage.py migrate --noinput
-
-echo "Checking if initial data needs loading..."
-python manage.py shell -c "
-from core.models import SiteSettings
-if not SiteSettings.objects.exists():
-    print('LOAD_FIXTURES')
-else:
-    print('SKIP_FIXTURES')
-" > /tmp/fixture_check.txt 2>&1
-
-if grep -q "LOAD_FIXTURES" /tmp/fixture_check.txt; then
-    echo "First deploy — loading initial data..."
-    python manage.py loaddata core/fixtures/initial_data.json
-    echo "Initial data loaded."
-else
-    echo "Data already exists — skipping fixtures. Admin changes are preserved."
-fi
 
 echo "Creating superuser if not exists..."
 python manage.py shell -c "
