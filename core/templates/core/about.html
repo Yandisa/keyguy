@@ -1,0 +1,88 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}About | {{ settings.business_name }}{% endblock %}
+{% block meta_description %}About KeyGuy Centurion — mobile car key repair, reprogramming and diagnostics specialist based in Centurion, Pretoria.{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'home' %}">Home</a> › <span>About</span></div>
+    <div class="page-hero-kicker">Who We Are</div>
+    <h1>About <span>KeyGuy Centurion</span></h1>
+    <p>Mobile car key repair and reprogramming specialist — we come to you.</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section section-darker">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <img class="about-img-main" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=900&q=80" alt="Automotive technician at work">
+        <div class="about-badge">Mobile Specialist</div>
+      </div>
+      <div class="about-content fade-up">
+        <span class="section-kicker">Our Story</span>
+        <h2>Centurion's Trusted<br><span class="gold">Key Experts</span></h2>
+        <p>{{ settings.business_name }} is a mobile car key repair and reprogramming specialist. We come to your location and fix the problem on-site — at a fraction of dealership prices.</p>
+        <p>Based in Centurion, we serve customers across Pretoria and surrounding areas. Our fully-equipped mobile unit means you never need to arrange a tow or visit a workshop.</p>
+        <div class="check-list">
+          <div class="check-item"><div class="check-dot"></div><div class="check-text"><strong>All makes and models</strong><span>VW, Toyota, BMW, Mercedes, Ford and many more</span></div></div>
+          <div class="check-item"><div class="check-dot"></div><div class="check-text"><strong>Professional equipment</strong><span>Industry-grade programming tools and key-cutting machines on board</span></div></div>
+          <div class="check-item"><div class="check-dot"></div><div class="check-text"><strong>Transparent pricing</strong><span>Quoted upfront — no surprises, no hidden fees</span></div></div>
+          <div class="check-item"><div class="check-dot"></div><div class="check-text"><strong>On-site completion</strong><span>Vehicle tested and verified before we leave</span></div></div>
+          <div class="check-item"><div class="check-dot"></div><div class="check-text"><strong>Fast response</strong><span>We give honest ETAs — no false promises</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item"><div class="stat-num" data-count="{{ settings.stat_jobs_done }}">0</div><div class="stat-label">Jobs Done</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="{{ settings.stat_makes_covered }}">0</div><div class="stat-label">Makes Served</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="{{ settings.stat_areas_served }}">0</div><div class="stat-label">Areas Served</div></div>
+    <div class="stat-item"><div class="stat-num" style="font-size:2rem;">{{ settings.stat_rating_label }}</div><div class="stat-label">Customer Rated</div></div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="section-kicker">FAQ</span>
+      <h2>Common <span class="gold">Questions</span></h2>
+      <p>Still have a question? Just WhatsApp us.</p>
+    </div>
+    <div class="faq-list fade-up">
+      {% for faq in faqs %}
+      <details class="faq-item" {% if forloop.first %}open{% endif %}>
+        <summary>{{ faq.question }}<span class="faq-chevron"></span></summary>
+        <div class="faq-body">{{ faq.answer }}</div>
+      </details>
+      {% empty %}
+      <p style="color:#5a7aaa;text-align:center;">No FAQs yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Key Not Working?<br><span class="gold">We Repair &amp; Reprogram — At Your Location.</span></h2>
+    <p>Fast, professional mobile key repair and reprogramming in {{ settings.location }}.</p>
+    <div class="cta-actions">
+      <a class="btn btn-gold" href="{{ settings.phone_primary_url }}">Call {{ settings.phone_primary }}</a>
+      <a class="btn btn-wa" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Now</a>
+      <a class="btn btn-outline" href="{% url 'contact' %}">Get a Quote</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
