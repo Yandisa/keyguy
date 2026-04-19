@@ -1,0 +1,83 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Services | {{ settings.business_name }}{% endblock %}
+{% block meta_description %}Mobile car key repair, reprogramming and diagnostics in Centurion and Pretoria. All services performed at your location.{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'home' %}">Home</a> › <span>Services</span></div>
+    <div class="page-hero-kicker">What We Do</div>
+    <h1>Our <span>Services</span></h1>
+    <p>Every job done at your location — home, office or roadside. No towing, no dealership required.</p>
+  </div>
+</div>
+
+<!-- SERVICES GRID -->
+<section class="section section-darker">
+  <div class="container">
+    <div class="services-grid">
+      {% for service in services %}
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          {% if service.icon == 'key' %}
+          <svg viewBox="0 0 24 24"><circle cx="7.5" cy="8.5" r="3.5"/><path d="M11 8.5h10M17 8.5v3M20 8.5v2"/></svg>
+          {% elif service.icon == 'cpu' %}
+          <svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 1v4M14 1v4M10 19v4M14 19v4M19 10h4M19 14h4M1 10h4M1 14h4"/></svg>
+          {% elif service.icon == 'scissors' %}
+          <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88m6.35-.4 5.53 5.52M8.12 8.12 12 12"/></svg>
+          {% elif service.icon == 'car' %}
+          <svg viewBox="0 0 24 24"><path d="M5 17h14l1-4-2-5H6L4 13l1 4Z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+          {% elif service.icon == 'diagnostics' %}
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          {% elif service.icon == 'shield' %}
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {% elif service.icon == 'wrench' %}
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a6 6 0 0 1-7.9 7.9l-7 7a2.1 2.1 0 0 1-3-3l7-7a6 6 0 0 1 7.9-7.9Z"/></svg>
+          {% else %}
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a6 6 0 0 1-7.9 7.9l-7 7a2.1 2.1 0 0 1-3-3l7-7a6 6 0 0 1 7.9-7.9Z"/></svg>
+          {% endif %}
+        </div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+      {% empty %}
+      <p style="color:#5a7aaa;grid-column:1/-1;text-align:center;">No services added yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="section-kicker">Simple Process</span>
+      <h2>Back on the Road<br><span class="gold">in Three Steps</span></h2>
+      <p>No waiting rooms, no tow trucks. Simple from your first call to driving away.</p>
+    </div>
+    <div class="steps-grid fade-up">
+      <div class="step-item"><div class="step-num">1</div><div><h3>Call or WhatsApp</h3><p>Tell us your car make, model and problem. We quote fast and give you an honest ETA.</p></div></div>
+      <div class="step-item"><div class="step-num">2</div><div><h3>We Come to You</h3><p>Our mobile unit arrives at your home, office or roadside — fully equipped, no towing needed.</p></div></div>
+      <div class="step-item"><div class="step-num">3</div><div><h3>Job Done On-Site</h3><p>Your key is cut, programmed or repaired and tested in your vehicle before we leave.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Ready to Get Started?<br><span class="gold">We Come to You.</span></h2>
+    <p>Call or WhatsApp for an instant quote. We serve Centurion, Pretoria and surrounding areas.</p>
+    <div class="cta-actions">
+      <a class="btn btn-gold" href="{{ settings.phone_primary_url }}">Call {{ settings.phone_primary }}</a>
+      <a class="btn btn-wa" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Now</a>
+      <a class="btn btn-outline" href="{% url 'contact' %}">Get a Quote</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
