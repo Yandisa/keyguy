@@ -1,0 +1,115 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Reviews | {{ settings.business_name }}{% endblock %}
+{% block meta_description %}Real customer reviews for KeyGuy Centurion — mobile car key repair and reprogramming in Centurion and Pretoria.{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'home' %}">Home</a> › <span>Reviews</span></div>
+    <div class="page-hero-kicker">What Customers Say</div>
+    <h1>Customer <span>Reviews</span></h1>
+    <p>Real feedback from customers across Centurion and Pretoria.</p>
+  </div>
+</div>
+
+<!-- REVIEWS GRID -->
+<section class="section section-darker">
+  <div class="container">
+    {% if reviews %}
+    <div class="testimonials-grid">
+      {% for review in reviews %}
+      <div class="testimonial-card fade-up">
+        <div class="stars">{{ review.stars }}</div>
+        <p>"{{ review.body }}"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">{{ review.initials }}</div>
+          <div>
+            <div class="author-name">{{ review.author_name }}</div>
+            <div class="author-meta">{% if review.location %}{{ review.location }}{% endif %}{% if review.service_used %} · {{ review.service_used }}{% endif %}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="color:#5a7aaa;text-align:center;padding:40px 0;">Reviews coming soon.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- SUBMIT A REVIEW -->
+<section class="section section-dark" id="submit-review">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="section-kicker">Share Your Experience</span>
+      <h2>Leave a <span class="gold">Review</span></h2>
+      <p>Had a good experience? Let others know. All reviews are verified before going live.</p>
+    </div>
+
+    <div style="max-width:640px;margin:0 auto;">
+      {% if review_submitted %}
+      <div class="django-message success" style="text-align:center;padding:24px;">
+        ✅ Thank you for your review! It will appear once approved.
+      </div>
+      {% else %}
+      <div class="contact-form-wrap fade-up">
+        <div class="form-title">Submit a Review</div>
+        <div class="form-sub">Your review will be checked before it goes live on the site.</div>
+
+        <form method="post" action="#submit-review">
+          {% csrf_token %}
+          <input type="hidden" name="review_form" value="1">
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your Name *</label>
+              <input type="text" name="author_name" placeholder="Full name" required maxlength="100" value="{{ review_form_data.author_name|default:'' }}">
+            </div>
+            <div class="form-field">
+              <label>Location</label>
+              <input type="text" name="location" placeholder="e.g. Centurion" maxlength="100" value="{{ review_form_data.location|default:'' }}">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Service Used</label>
+            <select name="service_used">
+              <option value="">Select a service (optional)</option>
+              <option value="Key Repair">Key Repair</option>
+              <option value="Key Reprogramming">Key Reprogramming</option>
+              <option value="Key Cutting">Key Cutting</option>
+              <option value="Mobile Diagnostics">Mobile Diagnostics</option>
+              <option value="Remote & Fob Repair">Remote &amp; Fob Repair</option>
+              <option value="Spare Key Cutting">Spare Key Cutting</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Rating *</label>
+            <select name="rating" required>
+              <option value="5">★★★★★ Excellent</option>
+              <option value="4">★★★★☆ Good</option>
+              <option value="3">★★★☆☆ Average</option>
+              <option value="2">★★☆☆☆ Poor</option>
+              <option value="1">★☆☆☆☆ Very Poor</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Your Review *</label>
+            <textarea name="body" placeholder="Tell us about your experience..." rows="5" required maxlength="1000">{{ review_form_data.body|default:'' }}</textarea>
+          </div>
+          {% if review_errors %}
+          <div class="django-message error">{{ review_errors }}</div>
+          {% endif %}
+          <button class="btn btn-gold" type="submit" style="width:100%;font-size:1rem;padding:16px;">Submit Review</button>
+          <div class="form-note">Your review will be visible after approval by our team.</div>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
