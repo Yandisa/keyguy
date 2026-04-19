@@ -397,10 +397,13 @@
     }
 
 
-    /* ── GALLERY VIDEO ── */
-    .gallery-item.video-item iframe{width:100%;height:100%;border:none;display:block}
-    .gallery-item.video-item{background:#1a2d5a;position:relative}
-    .gallery-item.video-item::after{display:none}  /* no dark overlay on videos */
+    /* ── GALLERY VIDEO THUMBNAIL ── */
+    .gallery-item.video-item{position:relative;cursor:pointer;display:block;text-decoration:none}
+    .gallery-item.video-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .gallery-item.video-item:hover img{transform:scale(1.05)}
+    .video-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:rgba(255,0,0,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .2s}
+    .gallery-item.video-item:hover .video-play-btn{background:rgba(255,0,0,1);transform:translate(-50%,-50%) scale(1.1)}
+    .video-play-btn svg{width:28px;height:28px;fill:#fff;margin-left:4px}
     /* ── BACK TO TOP ── */
     .back-to-top{position:fixed;right:20px;bottom:96px;width:44px;height:44px;border-radius:50%;background:#1a2d5a;color:#fff;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 16px rgba(26,45,90,.35);z-index:199;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .2s}
     .back-to-top.visible{opacity:1;transform:translateY(0)}
@@ -602,15 +605,12 @@
     <div class="gallery-grid fade-up">
       {% for item in gallery %}
       {% if item.is_video %}
-      <div class="gallery-item video-item">
-        <iframe
-          src="{{ item.embed_url }}"
-          title="{{ item.caption|default:'Video' }}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
+      <a class="gallery-item video-item" href="{{ item.video_link }}" target="_blank" rel="noopener" title="{{ item.caption|default:'Watch video' }}">
+        <img src="{{ item.thumbnail_url }}" alt="{{ item.caption|default:'Video' }}" loading="lazy">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </a>
       {% else %}
       <div class="gallery-item">
         <img src="{{ item.src }}" alt="{{ item.caption }}">
