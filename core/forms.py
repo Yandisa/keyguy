@@ -3,13 +3,13 @@ from .models import QuoteRequest
 
 SERVICE_CHOICES = [
     ('', 'Select a service'),
-    ('Spare key',             'Spare key'),
-    ('Key programming',       'Key programming'),
-    ('Key cutting',           'Key cutting'),
-    ('Vehicle diagnostics',   'Vehicle diagnostics'),
-    ('Mobile diagnostics',    'Mobile diagnostics'),
-    ('Key or remote repair',  'Key or remote repair'),
-    ('Other / not sure',      'Other / not sure'),
+    ('Key Repair',         'Key Repair'),
+    ('Key Reprogramming',  'Key Reprogramming'),
+    ('Key Cutting',        'Key Cutting'),
+    ('Mobile Diagnostics', 'Mobile Diagnostics'),
+    ('Remote & Fob Repair','Remote & Fob Repair'),
+    ('Spare Key Cutting',  'Spare Key Cutting'),
+    ('Other / not sure',   'Other / not sure'),
 ]
 
 class QuoteForm(forms.ModelForm):
