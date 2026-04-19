@@ -214,29 +214,40 @@ class GalleryImage(models.Model):
             return self.image.url
         return self.image_url
 
-    def embed_url(self):
-        """Convert any YouTube URL or iframe tag to a clean embed URL."""
+    def _extract_video_id(self):
+        """Extract YouTube video ID from any YouTube URL or iframe tag."""
         import re
         url = self.video_url.strip()
+        # Extract src from iframe tag if full iframe was pasted
+        # Use a simple split approach to avoid quote conflicts in regex
+        if '<iframe' in url and 'src=' in url:
+            part = url.split('src=')[1]
+            quote = part[0]
+            url = part[1:part.index(quote, 1)]
+        # Match video ID from any YouTube URL format
+        match = re.search(r'(?:youtube\.com/(?:embed/|watch\?v=|shorts/)|youtu\.be/)([\w-]{11})', url)
+        return match.group(1) if match else None
 
-        # If they pasted a full <iframe> tag, extract the src
-        iframe_src = re.search(r'src=["\']([^"\']+)["\']', url)
-        if iframe_src:
-            url = iframe_src.group(1)
+    def video_link(self):
+        """Return a direct YouTube watch URL for opening in a new tab."""
+        vid = self._extract_video_id()
+        if vid:
+            return f"https://www.youtube.com/watch?v={vid}"
+        return self.video_url
 
-        # Already an embed URL
-        if 'youtube.com/embed/' in url:
-            vid = re.search(r'youtube\.com/embed/([\w-]{11})', url)
-            if vid:
-                return f'https://www.youtube.com/embed/{vid.group(1)}?rel=0&modestbranding=1'
-            return url
+    def thumbnail_url(self):
+        """Return YouTube high-quality thumbnail image URL."""
+        vid = self._extract_video_id()
+        if vid:
+            return f"https://img.youtube.com/vi/{vid}/hqdefault.jpg"
+        return ""
 
-        # Normal watch URL or youtu.be or shorts
-        yt = re.search(r'(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]{11})', url)
-        if yt:
-            return f'https://www.youtube.com/embed/{yt.group(1)}?rel=0&modestbranding=1'
-
-        return url
+    def embed_url(self):
+        """Return embed URL (kept for backwards compatibility)."""
+        vid = self._extract_video_id()
+        if vid:
+            return f"https://www.youtube.com/embed/{vid}?rel=0&modestbranding=1"
+        return self.video_url
 
 
 # ─────────────────────────────────────────────────────────────
