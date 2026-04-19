@@ -189,23 +189,44 @@ class FAQ(models.Model):
 # ─────────────────────────────────────────────────────────────
 class GalleryImage(models.Model):
     image     = models.ImageField(upload_to='gallery/', blank=True, null=True)
-    image_url = models.URLField(blank=True, help_text='Or paste a URL if not uploading a file')
+    image_url = models.URLField(blank=True, help_text='Or paste an image URL if not uploading a file')
+    video_url = models.URLField(
+        blank=True,
+        help_text='Paste a YouTube or TikTok URL. Leave blank for images.'
+    )
     caption   = models.CharField(max_length=200, blank=True)
     order     = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['order']
-        verbose_name        = 'Gallery Image'
-        verbose_name_plural = 'Gallery Images'
+        verbose_name        = 'Gallery Item'
+        verbose_name_plural = 'Gallery Items'
 
     def __str__(self):
-        return self.caption or f'Image {self.pk}'
+        return self.caption or f'Item {self.pk}'
+
+    def is_video(self):
+        return bool(self.video_url)
 
     def src(self):
         if self.image:
             return self.image.url
         return self.image_url
+
+    def embed_url(self):
+        """Convert a YouTube or TikTok watch URL to an embed URL."""
+        import re
+        url = self.video_url
+        # YouTube: watch?v=ID or youtu.be/ID or shorts/ID
+        yt = re.search(r'(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]{11})', url)
+        if yt:
+            return f'https://www.youtube.com/embed/{yt.group(1)}?rel=0&modestbranding=1'
+        # TikTok: /video/ID
+        tt = re.search(r'tiktok\.com/.+/video/(\d+)', url)
+        if tt:
+            return f'https://www.tiktok.com/embed/v2/{tt.group(1)}'
+        return url
 
 
 # ─────────────────────────────────────────────────────────────
