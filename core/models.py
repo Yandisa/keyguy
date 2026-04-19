@@ -220,7 +220,7 @@ class GalleryImage(models.Model):
         url = self.video_url.strip()
 
         # If they pasted a full <iframe> tag, extract the src
-        iframe_src = re.search(r'src=["\'](https://[^\"']+)["\']', url)
+        iframe_src = re.search(r'src=["\']([^"\']+)["\']', url)
         if iframe_src:
             url = iframe_src.group(1)
 
