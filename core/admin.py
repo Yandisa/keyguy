@@ -22,7 +22,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             'description': 'Upload an image OR paste a URL. Uploaded image takes priority.',
         }),
         ('📊 Stats Bar', {
-            'fields': ('stat_keys_replaced', 'stat_makes_covered',
+            'fields': ('stat_jobs_done', 'stat_makes_covered',
                        'stat_areas_served', 'stat_rating_label'),
         }),
         ('🕐 Operations', {
