@@ -95,15 +95,41 @@ class FAQAdmin(admin.ModelAdmin):
 # ─────────────────────────────────────────────────────────────
 @admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
-    list_display  = ('thumb', 'caption', 'order', 'is_active')
+    list_display  = ('thumb', 'caption', 'item_type', 'order', 'is_active')
     list_editable = ('order', 'is_active')
+    fieldsets = (
+        ('Image', {
+            'fields': ('image', 'image_url'),
+            'description': 'Upload an image file OR paste an image URL. Leave both blank if adding a video.',
+        }),
+        ('Video (YouTube or TikTok)', {
+            'fields': ('video_url',),
+            'description': 'Paste a YouTube or TikTok link. Example: https://www.youtube.com/watch?v=XXXX',
+        }),
+        ('Details', {
+            'fields': ('caption', 'order', 'is_active'),
+        }),
+    )
 
     def thumb(self, obj):
+        if obj.is_video():
+            return format_html('<span style="font-size:1.4rem;" title="{}">▶️</span>', obj.video_url)
         src = obj.src()
         if src:
             return format_html('<img src="{}" style="height:50px;border-radius:6px;">', src)
         return '—'
     thumb.short_description = 'Preview'
+
+    def item_type(self, obj):
+        if obj.is_video():
+            url = obj.video_url
+            if 'youtube' in url or 'youtu.be' in url:
+                return '▶ YouTube'
+            if 'tiktok' in url:
+                return '▶ TikTok'
+            return '▶ Video'
+        return '🖼 Image'
+    item_type.short_description = 'Type'
 
 
 # ─────────────────────────────────────────────────────────────
