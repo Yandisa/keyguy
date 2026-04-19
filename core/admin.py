@@ -104,7 +104,7 @@ class GalleryImageAdmin(admin.ModelAdmin):
         }),
         ('Video (YouTube only)', {
             'fields': ('video_url',),
-            'description': '⚠️ YouTube links only. Paste the full video URL e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX — TikTok does not support embedding on external sites.',
+            'description': '⚠️ YouTube links only. Paste the full video URL e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX.',
         }),
         ('Details', {
             'fields': ('caption', 'order', 'is_active'),
