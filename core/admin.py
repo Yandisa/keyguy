@@ -102,9 +102,9 @@ class GalleryImageAdmin(admin.ModelAdmin):
             'fields': ('image', 'image_url'),
             'description': 'Upload an image file OR paste an image URL. Leave both blank if adding a video.',
         }),
-        ('Video (YouTube or TikTok)', {
+        ('Video (YouTube only)', {
             'fields': ('video_url',),
-            'description': 'Paste a YouTube or TikTok link. Example: https://www.youtube.com/watch?v=XXXX',
+            'description': '⚠️ YouTube links only. Paste the full video URL e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX — TikTok does not support embedding on external sites.',
         }),
         ('Details', {
             'fields': ('caption', 'order', 'is_active'),
@@ -122,12 +122,7 @@ class GalleryImageAdmin(admin.ModelAdmin):
 
     def item_type(self, obj):
         if obj.is_video():
-            url = obj.video_url
-            if 'youtube' in url or 'youtu.be' in url:
-                return '▶ YouTube'
-            if 'tiktok' in url:
-                return '▶ TikTok'
-            return '▶ Video'
+            return '▶ YouTube'
         return '🖼 Image'
     item_type.short_description = 'Type'
 
