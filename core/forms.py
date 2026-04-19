@@ -3,7 +3,6 @@ from .models import QuoteRequest
 
 SERVICE_CHOICES = [
     ('', 'Select a service'),
-    ('Lost key replacement',  'Lost key replacement'),
     ('Spare key',             'Spare key'),
     ('Key programming',       'Key programming'),
     ('Key cutting',           'Key cutting'),
