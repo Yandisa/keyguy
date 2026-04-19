@@ -215,13 +215,27 @@ class GalleryImage(models.Model):
         return self.image_url
 
     def embed_url(self):
-        """Convert a YouTube watch URL to an embed URL."""
+        """Convert any YouTube URL or iframe tag to a clean embed URL."""
         import re
-        url = self.video_url
-        # YouTube: watch?v=ID or youtu.be/ID or shorts/ID
+        url = self.video_url.strip()
+
+        # If they pasted a full <iframe> tag, extract the src
+        iframe_src = re.search(r'src=["\'](https://[^\"']+)["\']', url)
+        if iframe_src:
+            url = iframe_src.group(1)
+
+        # Already an embed URL
+        if 'youtube.com/embed/' in url:
+            vid = re.search(r'youtube\.com/embed/([\w-]{11})', url)
+            if vid:
+                return f'https://www.youtube.com/embed/{vid.group(1)}?rel=0&modestbranding=1'
+            return url
+
+        # Normal watch URL or youtu.be or shorts
         yt = re.search(r'(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]{11})', url)
         if yt:
             return f'https://www.youtube.com/embed/{yt.group(1)}?rel=0&modestbranding=1'
+
         return url
 
 
