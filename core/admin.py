@@ -65,10 +65,30 @@ class ServiceAdmin(admin.ModelAdmin):
 # ─────────────────────────────────────────────────────────────
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display  = ('author_name', 'location', 'service_used', 'rating', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
-    list_filter   = ('rating', 'is_active')
+    list_display  = ('author_name', 'location', 'rating', 'status', 'submitted_by_customer', 'order', 'is_active')
+    list_editable = ('status', 'order', 'is_active')
+    list_filter   = ('status', 'rating', 'is_active', 'submitted_by_customer')
     search_fields = ('author_name', 'body')
+    actions       = ['approve_reviews', 'reject_reviews']
+
+    def approve_reviews(self, request, queryset):
+        updated = queryset.update(status='approved', is_active=True)
+        self.message_user(request, f'{updated} review(s) approved and now live on the site.')
+    approve_reviews.short_description = '✅ Approve selected reviews'
+
+    def reject_reviews(self, request, queryset):
+        updated = queryset.update(status='rejected', is_active=False)
+        self.message_user(request, f'{updated} review(s) rejected.')
+    reject_reviews.short_description = '❌ Reject selected reviews'
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        pending = Testimonial.objects.filter(status='pending').count()
+        if pending:
+            self.message_user(request,
+                f'⏳ {pending} review(s) pending approval.',
+                level='warning')
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 # ─────────────────────────────────────────────────────────────
