@@ -126,12 +126,21 @@ class Service(models.Model):
 # TESTIMONIALS / REVIEWS
 # ─────────────────────────────────────────────────────────────
 class Testimonial(models.Model):
+    STATUS_CHOICES = [
+        ('pending',  'Pending Approval'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
     author_name  = models.CharField(max_length=100)
     location     = models.CharField(max_length=100, blank=True, help_text='e.g. Centurion')
     service_used = models.CharField(max_length=100, blank=True, help_text='e.g. Key replacement')
     body         = models.TextField()
     rating       = models.PositiveSmallIntegerField(default=5, choices=[(i, f'{i} stars') for i in range(1, 6)])
     is_active    = models.BooleanField(default=True)
+    status       = models.CharField(max_length=20, choices=STATUS_CHOICES, default='approved',
+                                    help_text='Only approved reviews show on the site')
+    submitted_by_customer = models.BooleanField(default=False,
+                                                help_text='Submitted via the website form')
     order        = models.PositiveIntegerField(default=0)
 
     class Meta:
