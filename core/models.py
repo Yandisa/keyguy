@@ -190,9 +190,9 @@ class FAQ(models.Model):
 class GalleryImage(models.Model):
     image     = models.ImageField(upload_to='gallery/', blank=True, null=True)
     image_url = models.URLField(blank=True, help_text='Or paste an image URL if not uploading a file')
-    video_url = models.URLField(
+    video_url = models.TextField(
         blank=True,
-        help_text='YouTube links only — e.g. https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX. Leave blank for images.'
+        help_text='Paste a YouTube URL or the full embed code from YouTube (Share → Embed). Leave blank for images.'
     )
     caption   = models.CharField(max_length=200, blank=True)
     order     = models.PositiveIntegerField(default=0)
