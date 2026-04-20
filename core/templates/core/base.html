@@ -6,7 +6,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{% block title %}{{ settings.meta_title }}{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{{ settings.meta_description }}{% endblock %}"/>
+  <meta name="keywords" content="car key diagnostics Centurion, mobile car key Pretoria, car key repair Centurion, key cutting Pretoria, car key reprogramming, remote programming, fob repair, mobile locksmith Centurion, auto diagnostics Pretoria, KeyGuy, Boss D"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="KeyGuy Boss D"/>
+  <meta name="geo.region" content="ZA-GP"/>
+  <meta name="geo.placename" content="Centurion, Pretoria"/>
   <meta name="theme-color" content="#1a2d5a"/>
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="KeyGuy Boss D"/>
+  <meta property="og:title" content="{% block og_title %}{{ settings.meta_title }}{% endblock %}"/>
+  <meta property="og:description" content="{% block og_description %}{{ settings.meta_description }}{% endblock %}"/>
+  <meta property="og:url" content="https://www.bossd.co.za{{ request.path }}"/>
+  <meta property="og:image" content="{% block og_image %}{{ settings.hero_bg }}{% endblock %}"/>
+  <meta property="og:locale" content="en_ZA"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="{% block twitter_title %}{{ settings.meta_title }}{% endblock %}"/>
+  <meta name="twitter:description" content="{% block twitter_description %}{{ settings.meta_description }}{% endblock %}"/>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.bossd.co.za{{ request.path }}"/>
+
+  <!-- Schema.org LocalBusiness markup for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutomotiveBusiness",
+    "name": "KeyGuy Boss D",
+    "alternateName": "KeyGuy Centurion",
+    "description": "Mobile car key repair, diagnostics, key cutting and programming across Centurion and Pretoria. All makes and models.",
+    "image": "{{ settings.hero_bg }}",
+    "url": "https://www.bossd.co.za",
+    "telephone": ["+27{{ settings.phone_primary|slice:'1:'|cut:' ' }}", "+27{{ settings.phone_secondary|slice:'1:'|cut:' ' }}"],
+    "email": "{{ settings.email }}",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Centurion",
+      "addressRegion": "Gauteng",
+      "addressCountry": "ZA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.8603,
+      "longitude": 28.1894
+    },
+    "areaServed": [
+      {"@type":"City","name":"Centurion"},
+      {"@type":"City","name":"Pretoria"},
+      {"@type":"City","name":"Midrand"},
+      {"@type":"City","name":"Irene"},
+      {"@type":"City","name":"Kyalami"}
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "makesOffer": [
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Car Key Repair"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Key Cutting"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Key Programming"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Mobile Diagnostics"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Remote & Fob Repair"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Spare Key Cutting"}}
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "3"
+    }
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 58'%3E%3Cpath d='M29 3 L52 13 L52 30 C52 43 40 52 29 55 C18 52 6 43 6 30 L6 13 Z' fill='%23c9972a'/%3E%3Cpath d='M29 7 L48 16 L48 30 C48 41 38 49 29 52 C20 49 10 41 10 30 L10 16 Z' fill='%230a0f1e'/%3E%3Cpath d='M29 7 L48 16 L48 20 L10 20 L10 16 Z' fill='%23e03c2f'/%3E%3Ccircle cx='22' cy='32' r='5' fill='none' stroke='%23f0bb50' stroke-width='2.2'/%3E%3Cline x1='27' y1='32' x2='38' y2='32' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3Cline x1='35' y1='32' x2='35' y2='36' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3Cline x1='38' y1='32' x2='38' y2='35' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 58'%3E%3Cpath d='M29 3 L52 13 L52 30 C52 43 40 52 29 55 C18 52 6 43 6 30 L6 13 Z' fill='%23c9972a'/%3E%3Cpath d='M29 7 L48 16 L48 30 C48 41 38 49 29 52 C20 49 10 41 10 30 L10 16 Z' fill='%230a0f1e'/%3E%3Cpath d='M29 7 L48 16 L48 20 L10 20 L10 16 Z' fill='%23e03c2f'/%3E%3Ccircle cx='22' cy='32' r='5' fill='none' stroke='%23f0bb50' stroke-width='2.2'/%3E%3Cline x1='27' y1='32' x2='38' y2='32' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3Cline x1='35' y1='32' x2='35' y2='36' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3Cline x1='38' y1='32' x2='38' y2='35' stroke='%23f0bb50' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
