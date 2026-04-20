@@ -15,6 +15,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # ── APPS ──────────────────────────────────────────────────────────────────────
+SITE_ID = 1
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'core',
 ]
 
@@ -89,14 +93,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ── EMAIL ─────────────────────────────────────────────────────────────────────
-EMAIL_BACKEND       = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
-EMAIL_HOST          = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT          = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS       = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', '')
+# ── EMAIL (domains.co.za cPanel SMTP — SSL) ───────────────────────────────────
+EMAIL_BACKEND       = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST          = os.environ.get('EMAIL_HOST', 'cp72.domains.co.za')
+EMAIL_PORT          = int(os.environ.get('EMAIL_PORT', 465))
+EMAIL_USE_SSL       = os.environ.get('EMAIL_USE_SSL', 'True') == 'True'
+EMAIL_USE_TLS       = os.environ.get('EMAIL_USE_TLS', 'False') == 'True'
+EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', 'keys@bossd.co.za')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'KeyGuy Boss D <keyesdiagnosis@gmail.com>')
+DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'KeyGuy Boss D <keys@bossd.co.za>')
+SERVER_EMAIL        = os.environ.get('SERVER_EMAIL', 'keys@bossd.co.za')
 
 # ── PRODUCTION SECURITY ───────────────────────────────────────────────────────
 if not DEBUG:
