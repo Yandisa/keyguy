@@ -103,6 +103,7 @@ EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', 'keys@bossd.co.za')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'KeyGuy Boss D <keys@bossd.co.za>')
 SERVER_EMAIL        = os.environ.get('SERVER_EMAIL', 'keys@bossd.co.za')
+EMAIL_TIMEOUT       = 5  # seconds — fail fast instead of hanging
 
 # ── PRODUCTION SECURITY ───────────────────────────────────────────────────────
 if not DEBUG:
