@@ -1,11 +1,32 @@
 {% extends "core/base.html" %}
 {% load static keyguy_tags %}
 
+{% block schema_extra %}
+{% if faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{% for faq in faqs %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.question|escapejs }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ faq.answer|escapejs }}"
+      }
+    }{% if not forloop.last %},{% endif %}{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg">
-    <img src="{{ settings.hero_bg }}" alt="Mobile car key service">
+    <img src="{{ settings.hero_bg }}" alt="KeyGuy Boss D mobile car key technician on-site in Centurion, Pretoria" fetchpriority="high" loading="eager">
   </div>
   <div class="hero-overlay-glow"></div>
   <div class="container">

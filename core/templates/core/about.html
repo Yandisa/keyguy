@@ -1,8 +1,40 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}About | {{ settings.business_name }}{% endblock %}
-{% block meta_description %}About KeyGuy Boss D — trusted mobile car key repair and diagnostics specialist in Centurion. Serving Pretoria, Midrand, Irene, Kyalami and surrounding areas. All makes and models.{% endblock %}
+{% block title %}About KeyGuy Boss D | Mobile Car Key Specialist, Centurion{% endblock %}
+{% block meta_description %}About KeyGuy Boss D — Centurion's trusted mobile car key repair and diagnostics specialist. Serving Pretoria, Midrand, Irene, Kyalami. All makes and models. No towing required.{% endblock %}
+{% block og_title %}About KeyGuy Boss D — Mobile Car Key Specialist in Centurion & Pretoria{% endblock %}
+
+{% block schema_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.bossd.co.za/"},
+    {"@type": "ListItem", "position": 2, "name": "About", "item": "https://www.bossd.co.za/about/"}
+  ]
+}
+</script>
+{% if faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{% for faq in faqs %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.question|escapejs }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ faq.answer|escapejs }}"
+      }
+    }{% if not forloop.last %},{% endif %}{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
 
 {% block content %}
 
